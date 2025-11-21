@@ -1,21 +1,58 @@
+"use client";
 import Navbar from "../components/layouts/Navar";
 import Footer from "../components/layouts/Footer";
 import Link from "next/link";
 
 export default function AcademicsPage() {
   const courses = [
-    { title: "Undergraduate Programs", desc: "B.Tech, B.Sc, BBA, course structure, credits and internships." },
-    { title: "Postgraduate Programs", desc: "M.Tech, MBA, M.Sc, specializations and project work." },
-    { title: "Doctoral Research", desc: "PhD admissions, guides, labs and research publications." },
-    { title: "Diploma Courses", desc: "Short-term diploma programs and flexible learning modules." },
-    { title: "Online Certification", desc: "Self-paced certified online courses for skills and careers." },
-    { title: "Professional Training", desc: "Industry-ready training with hands-on workshops." },
-    { title: "Foreign Exchange Programs", desc: "Study abroad opportunities and international MoUs." },
-    { title: "Skill Development", desc: "Placement-oriented training and soft skills development." },
-    { title: "Honors Program", desc: "Advanced learning path for high-performing students." },
-    { title: "Value-Added Courses", desc: "Extra certification, add-on modules and seminars." },
-    { title: "Research Centers", desc: "AI, Robotics, Biotechnology and Innovation centers." },
-    { title: "Library & Learning Resources", desc: "Digital library, journals and study spaces." },
+    {
+      title: "Undergraduate Programs",
+      desc: "B.Tech, B.Sc, BBA — modern syllabus, credits, internships, and industry projects.",
+    },
+    {
+      title: "Postgraduate Programs",
+      desc: "M.Tech, MBA, M.Sc — specialized courses, research projects, and career growth.",
+    },
+    {
+      title: "Doctoral Research",
+      desc: "PhD programs, guides, labs, funded projects, and international publications.",
+    },
+    {
+      title: "Diploma Courses",
+      desc: "Short-term diploma programs with flexible schedules for skill enhancement.",
+    },
+    {
+      title: "Online Certification",
+      desc: "Self-paced online courses with certificates to boost professional skills.",
+    },
+    {
+      title: "Professional Training",
+      desc: "Hands-on workshops, industry-ready training, and placement-focused modules.",
+    },
+    {
+      title: "Foreign Exchange Programs",
+      desc: "Study abroad opportunities, international collaborations, and MoUs.",
+    },
+    {
+      title: "Skill Development",
+      desc: "Soft skills, personality development, and placement-oriented training.",
+    },
+    {
+      title: "Honors Program",
+      desc: "Advanced learning tracks for high-performing and merit-based students.",
+    },
+    {
+      title: "Value-Added Courses",
+      desc: "Extra certifications, add-on modules, and professional seminars.",
+    },
+    {
+      title: "Research Centers",
+      desc: "AI, Robotics, Biotechnology, Innovation labs, and interdisciplinary centers.",
+    },
+    {
+      title: "Library & Learning Resources",
+      desc: "Digital library, journals, e-resources, and collaborative study spaces.",
+    },
   ];
 
   return (
@@ -48,7 +85,7 @@ export default function AcademicsPage() {
         </div>
       </section>
 
-      {/* ACADEMICS GRID – DARK BLUE & YELLOW */}
+      {/* ACADEMICS GRID */}
       <section id="academics" className="w-full bg-[#0A1C2E] py-24 px-6">
         <h2 className="text-4xl font-extrabold text-center text-yellow-400 mb-14 drop-shadow-lg">
           Academic Offerings
@@ -80,8 +117,54 @@ export default function AcademicsPage() {
           ))}
         </div>
 
+        {/* DETAILED SECTIONS */}
+        <div className="max-w-6xl mx-auto mt-20 space-y-16">
+          {/* Example: Department Section */}
+          <div className="bg-[#081C32] p-8 rounded-2xl shadow-xl">
+            <h3 className="text-3xl font-bold text-yellow-400 mb-4">
+              Computer Science & Engineering
+            </h3>
+            <p className="text-gray-300 mb-3">
+              Offers B.Tech, M.Tech, and research programs with modern labs, AI & Robotics specialization, and internship opportunities.
+            </p>
+            <ul className="list-disc list-inside text-gray-300 space-y-2">
+              <li>State-of-the-art AI and ML labs</li>
+              <li>Industry collaborations for internships</li>
+              <li>Research projects in Robotics, Data Science, and Software Engineering</li>
+            </ul>
+          </div>
+
+          <div className="bg-[#081C32] p-8 rounded-2xl shadow-xl">
+            <h3 className="text-3xl font-bold text-yellow-400 mb-4">
+              Business & Management
+            </h3>
+            <p className="text-gray-300 mb-3">
+              MBA and BBA programs with case-study approach, entrepreneurship modules, and corporate tie-ups.
+            </p>
+            <ul className="list-disc list-inside text-gray-300 space-y-2">
+              <li>Live projects with top companies</li>
+              <li>Leadership and soft skill workshops</li>
+              <li>International exchange opportunities</li>
+            </ul>
+          </div>
+
+          <div className="bg-[#081C32] p-8 rounded-2xl shadow-xl">
+            <h3 className="text-3xl font-bold text-yellow-400 mb-4">
+              Science & Research
+            </h3>
+            <p className="text-gray-300 mb-3">
+              M.Sc, PhD, and Diploma courses in Biology, Chemistry, Physics, and interdisciplinary research.
+            </p>
+            <ul className="list-disc list-inside text-gray-300 space-y-2">
+              <li>Research centers for AI, Biotechnology, and Renewable Energy</li>
+              <li>Funding for top student research projects</li>
+              <li>Collaborations with international universities</li>
+            </ul>
+          </div>
+        </div>
+
         {/* BACK BUTTON */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-20">
           <Link
             href="/"
             className="px-8 py-3 bg-yellow-400 text-[#0A2A43] font-semibold rounded-xl 

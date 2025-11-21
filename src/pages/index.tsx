@@ -3,8 +3,11 @@ import Link from "next/link";
 
 import Image from "next/image";
 import Footer from "../components/layouts/Footer";
+import NoticeBoard from "../components/sections/NoticeBoard";
 import { useEffect } from "react";
 import TestimonialCard from "@/components/ui/TestimonialCard";
+import about from "../pages/about"
+import AboutSection from "../pages/about";
 
 export default function Home() {
   // if user navigated from another page with hash, smooth-scroll to it
@@ -112,43 +115,47 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <header id="home" className="relative w-full h-[84vh] pt-20">
-        <div className="absolute inset-0">
-          <Image src="/college.png" alt="Campus" fill className="object-cover brightness-75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#071226]/80 via-transparent to-[#071226]/60" />
-        </div>
+<header id="home" className="relative w-full h-[84vh] pt-20">
+  <div className="absolute inset-0">
+    <Image src="/college.png" alt="Campus" fill className="object-cover brightness-75" />
+    <div className="absolute inset-0 bg-gradient-to-r from-[#071226]/80 via-transparent to-[#071226]/60" />
+  </div>
 
-        <div className="relative max-w-6xl mx-auto px-6 flex items-center h-full">
-          <div className="max-w-2xl text-white">
-            <h1 className="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow">
-              Premier Academic University
-            </h1>
-            <p className="mt-4 text-lg text-gray-200/90 max-w-xl">
-              Excellence in education, research, and leadership — join a community that shapes
-              the future.
-            </p>
+  <div className="relative max-w-6xl mx-auto px-6 flex items-center h-full">
+    {/* Hero Text */}
+    <div className="max-w-2xl text-white">
+      <h1 className="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow">
+        Premier Academic University
+      </h1>
+      <p className="mt-4 text-lg text-gray-200/90 max-w-xl">
+        Excellence in education, research, and leadership — join a community that shapes
+        the future.
+      </p>
 
-            <div className="mt-8 flex gap-4">
-              <button
-                onClick={() => scrollToSection("admissions")}
-                className="bg-yellow-400 hover:bg-yellow-500 text-[#071226] font-semibold px-6 py-3 rounded-lg shadow-lg transition transform hover:-translate-y-0.5"
-              >
-                Apply Now
-              </button>
+      <div className="mt-8 flex gap-4">
+        <button
+          onClick={() => scrollToSection("admissions")}
+          className="bg-yellow-400 hover:bg-yellow-500 text-[#071226] font-semibold px-6 py-3 rounded-lg shadow-lg transition transform hover:-translate-y-0.5"
+        >
+          Apply Now
+        </button>
 
-              <button
-                onClick={() => scrollToSection("about")}
-                className="border border-gray-400 text-white px-6 py-3 rounded-lg hover:bg-white/5 transition"
-              >
-                Learn About Us
-              </button>
-            </div>
-          </div>
+        <button
+          onClick={() => scrollToSection("about")}
+          className="border border-gray-400 text-white px-6 py-3 rounded-lg hover:bg-white/5 transition"
+        >
+          Learn About Us
+        </button>
+      </div>
+    </div>
 
-          
+    {/* Notice Board on large screens */}
+    <div className="hidden lg:block ml-auto">
+      <NoticeBoard />
+    </div>
+  </div>
+</header>
 
-        </div>
-      </header>
 
       {/* ADMISSIONS WITH IMAGES */}
 <section id="admissions" className="py-16 px-6 bg-[#071a2c]">
@@ -353,27 +360,8 @@ export default function Home() {
 </section>
 
 
-      {/* ABOUT SECTION WITH IMAGE */}
-      <section id="about" className="py-16 px-6 bg-[#071a2c]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-4">About Us</h2>
-            <p className="text-gray-300 mb-6">
-              Premier Academic University has been a leader in education for over 25 years. We provide
-              research-led teaching, industry collaboration, and a supportive campus environment.
-            </p>
-            <ul className="space-y-3 text-gray-300">
-              <li>• 25+ years of academic excellence</li>
-              <li>• Strong industry partnerships & placements</li>
-              <li>• International research collaborations</li>
-            </ul>
-          </div>
-
-          <div className="rounded-xl overflow-hidden shadow-lg">
-            <Image src="/About.jpg" width={900} height={600} alt="About campus" className="object-cover w-full h-full" />
-          </div>
-        </div>
-      </section>
+       
+       <AboutSection />
 
       {/* CONTACT WITH ICONS + MAP + FORM */}
       <section id="contact" className="py-16 px-6 bg-[#071226]">
