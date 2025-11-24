@@ -363,61 +363,86 @@ export default function Home() {
        
        <AboutSection />
 
-      {/* CONTACT WITH ICONS + MAP + FORM */}
-      <section id="contact" className="py-16 px-6 bg-[#071226]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-4">Contact Us</h2>
-            <p className="text-gray-300 mb-4">
-              Reach out for admissions, collaborations, or general enquiries.
-            </p>
+      {/* CONTACT SECTION WITH FORM + GOOGLE MAP EMBED */}
+<section id="contact" className="py-16 px-6 bg-[#071226]">
+  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
 
-            <div className="space-y-3 text-gray-200 mb-6">
-              <div className="flex items-center gap-3">
-                <span className="text-yellow-400">📧</span>
-                <span>contact@premieruniversity.edu</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-yellow-400">☎</span>
-                <span>+91 98765 43210</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-yellow-400">📍</span>
-                <span>Hyderabad, Telangana, India</span>
-              </div>
-            </div>
+    {/* LEFT SIDE - CONTACT INFO + FORM */}
+    <div>
+      <h2 className="text-3xl font-bold text-white mb-4">Contact Us</h2>
+      <p className="text-gray-300 mb-4">
+        For admissions, collaborations, or any enquiries, feel free to reach out.
+      </p>
 
-            <form className="bg-[#081428] p-4 rounded-lg shadow-inner">
-              <div className="grid md:grid-cols-2 gap-3">
-                <input
-                  className="bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338]"
-                  placeholder="Your name"
-                />
-                <input
-                  className="bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338]"
-                  placeholder="Email"
-                />
-              </div>
-
-              <textarea
-                className="w-full mt-3 bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338]"
-                placeholder="Message"
-                rows={4}
-              />
-
-              <div className="mt-3">
-                <button className="bg-yellow-400 text-[#071226] px-4 py-2 rounded font-semibold hover:bg-yellow-500 transition">
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div className="rounded-xl overflow-hidden shadow-lg">
-            <Image src="/map.jpg" width={900} height={600} alt="Map" className="object-cover w-full h-full" />
-          </div>
+      {/* CONTACT DETAILS */}
+      <div className="space-y-3 text-gray-200 mb-6">
+        <div className="flex items-center gap-3">
+          <span className="text-yellow-400 text-xl">📧</span>
+          <span>info@premieruniversity.edu.in</span>
         </div>
-      </section>
+
+        <div className="flex items-center gap-3">
+          <span className="text-yellow-400 text-xl">☎</span>
+          <span>+91 98765 43210</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="text-yellow-400 text-xl">📍</span>
+          <span>
+            Premier University,  
+            Hitech City Main Road,  
+            Hyderabad, Telangana 500081, India
+          </span>
+        </div>
+      </div>
+
+      {/* CONTACT FORM */}
+      <form className="bg-[#081428] p-4 rounded-lg shadow-inner space-y-3">
+        <div className="grid md:grid-cols-2 gap-3">
+          <input
+            className="bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338] focus:outline-none focus:ring-1 focus:ring-yellow-400"
+            placeholder="Your Name"
+            required
+          />
+          <input
+            type="email"
+            className="bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338] focus:outline-none focus:ring-1 focus:ring-yellow-400"
+            placeholder="Email"
+            required
+          />
+        </div>
+
+        <textarea
+          className="w-full bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338] focus:outline-none focus:ring-1 focus:ring-yellow-400"
+          placeholder="Message"
+          rows={4}
+          required
+        />
+
+        <button
+          type="submit"
+          className="bg-yellow-400 text-[#071226] px-4 py-2 rounded font-semibold hover:bg-yellow-500 transition w-full md:w-auto"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    {/* RIGHT SIDE - GOOGLE MAP EMBED */}
+    {/* <div className="rounded-xl overflow-hidden shadow-lg">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.413003353889!2d78.37346277507574!3d17.44974170137227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93e5e36c48fb%3A0x58a3bfa2a5756fa0!2sHitech%20City%2C%20Hyderabad%2C%20Telangana%20500081!5e0!3m2!1sen!2sin!4v1706200112345"
+        width="100%"
+        height="450"
+        allowFullScreen
+        loading="lazy"
+        className="w-full h-full border-0"
+      ></iframe>
+    </div> */}
+
+  </div>
+</section>
+
 
       <Footer />
     </div>
