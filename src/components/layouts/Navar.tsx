@@ -21,37 +21,38 @@ export default function Navbar() {
 
         {/* desktop links */}
         <ul className="hidden md:flex gap-6 items-center text-sm font-medium">
-
-          {/* ✅ HOME ADDED */}
           <li>
             <Link href="/#home" className="hover:text-yellow-500">
               Home
             </Link>
           </li>
-
           <li>
             <Link href="/#academics" className="hover:text-yellow-500">
               Academics
             </Link>
           </li>
-
           <li>
             <Link href="/#faculty" className="hover:text-yellow-500">
               Faculty
             </Link>
           </li>
-
           <li>
             <Link href="/#admission" className="hover:text-yellow-500">
               Admission
             </Link>
           </li>
-
           <li>
             <Link href="/#contact" className="hover:text-yellow-500">
               Contact
             </Link>
           </li>
+
+          {/* Login link */}
+          {/* <li>
+            <Link href="/login" className="hover:text-yellow-500">
+              Login
+            </Link>
+          </li> */}
         </ul>
 
         {/* mobile menu button */}
@@ -70,14 +71,11 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden bg-white shadow">
           <ul className="flex flex-col p-4 gap-3 text-sm">
-
-            {/* ✅ HOME ADDED IN MOBILE MENU */}
             <li>
               <Link href="/#home" onClick={() => setOpen(false)}>
                 Home
               </Link>
             </li>
-
             <li>
               <Link href="/#academics" onClick={() => setOpen(false)}>
                 Academics
@@ -98,6 +96,13 @@ export default function Navbar() {
                 Contact
               </Link>
             </li>
+
+            {/* Login link in mobile menu */}
+            {/* <li>
+              <Link href="/login" onClick={() => setOpen(false)}>
+                Login
+              </Link>
+            </li> */}
           </ul>
         </div>
       )}

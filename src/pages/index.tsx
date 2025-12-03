@@ -4,20 +4,46 @@ import Link from "next/link";
 import Image from "next/image";
 import Footer from "../components/layouts/Footer";
 import NoticeBoard from "../components/sections/NoticeBoard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import about from "../pages/about"
 import AboutSection from "../pages/about";
+import ContactForm from "./contact";
 
 export default function Home() {
-  // if user navigated from another page with hash, smooth-scroll to it
+  const [showMore, setShowMore] = useState(false);
+
+  // 🔥 SLIDER IMAGES
+  const images = [
+    "/col1.png",
+    "/col2.jpg",
+    "/col3.jpg",
+    "/col4.jpg"
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  // 🔥 Auto-slide every 2 sec
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Smooth scroll logic
   useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash;
     if (hash) {
       const id = hash.replace("#", "");
       const el = document.getElementById(id);
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+      if (el)
+        setTimeout(
+          () => el.scrollIntoView({ behavior: "smooth", block: "start" }),
+          60
+        );
     }
   }, []);
 
@@ -45,51 +71,57 @@ export default function Home() {
           </div>
 
           <ul className="hidden md:flex gap-6 items-center text-sm">
-            <li
-              className="cursor-pointer hover:text-yellow-400 transition"
-              onClick={() => scrollToSection("home")}
-            >
-              Home
-            </li>
-            <li
-              className="cursor-pointer hover:text-yellow-400 transition"
-              onClick={() => scrollToSection("admissions")}
-            >
-              Admissions
-            </li>
-            <li
-              className="cursor-pointer hover:text-yellow-400 transition"
-              onClick={() => scrollToSection("academics")}
-            >
-              Academics
-            </li>
-            <li
-              className="cursor-pointer hover:text-yellow-400 transition"
-              onClick={() => scrollToSection("faculty")}
-            >
-              Faculty
-            </li>
-            <li
-              className="cursor-pointer hover:text-yellow-400 transition"
-              onClick={() => scrollToSection("campus")}
-            >
-              Campus Life
-            </li>
-            <li
-              className="cursor-pointer hover:text-yellow-400 transition"
-              onClick={() => scrollToSection("about")}
-            >
-              About
-            </li>
-            <li
-              className="cursor-pointer hover:text-yellow-400 transition"
-              onClick={() => scrollToSection("contact")}
-            >
-              Contact
-            </li>
+            <li className="cursor-pointer hover:text-yellow-400 transition"
+              onClick={() => scrollToSection("home")}>Home</li>
+
+            <li className="cursor-pointer hover:text-yellow-400 transition"
+              onClick={() => scrollToSection("admissions")}>Admissions</li>
+
+            <li className="cursor-pointer hover:text-yellow-400 transition"
+              onClick={() => scrollToSection("academics")}>Academics</li>
+
+            <li className="cursor-pointer hover:text-yellow-400 transition"
+              onClick={() => scrollToSection("faculty")}>Faculty</li>
+
+            <li className="cursor-pointer hover:text-yellow-400 transition"
+              onClick={() => scrollToSection("campus")}>Campus Life</li>
+
+            <li className="cursor-pointer hover:text-yellow-400 transition"
+              onClick={() => scrollToSection("about")}>About</li>
+
+            <li className="cursor-pointer hover:text-yellow-400 transition"
+              onClick={() => scrollToSection("contact")}>Contact</li>
+
+            {/* {typeof window !== "undefined" &&
+            localStorage.getItem("loggedInUser") ? (
+              <>
+                <li>
+                  <Link href="/DashBoard" className="hover:text-yellow-400 transition">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("loggedInUser");
+                      window.location.href = "/login";
+                    }}
+                    className="hover:text-yellow-400 transition"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link href="/signup" className="hover:text-yellow-400 transition">
+                  Student Login
+                </Link>
+              </li>
+            )} */}
           </ul>
 
-          {/* mobile menu (simple) */}
+          {/* Mobile Menu */}
           <div className="md:hidden">
             <select
               onChange={(e) => {
@@ -99,9 +131,7 @@ export default function Home() {
               className="bg-[#0b2440] text-gray-200 px-3 py-2 rounded"
               defaultValue=""
             >
-              <option value="" disabled>
-                Menu
-              </option>
+              <option value="" disabled>Menu</option>
               <option value="home">Home</option>
               <option value="admissions">Admissions</option>
               <option value="academics">Academics</option>
@@ -109,55 +139,72 @@ export default function Home() {
               <option value="campus">Campus Life</option>
               <option value="about">About</option>
               <option value="contact">Contact</option>
+              <option value="login">Login</option>
             </select>
           </div>
         </div>
       </nav>
 
-      {/* HERO */}
-<header id="home" className="relative w-full h-[84vh] pt-20">
-  <div className="absolute inset-0">
-    <Image src="/college.png" alt="Campus" fill className="object-cover brightness-75" />
-    <div className="absolute inset-0 bg-gradient-to-r from-[#071226]/80 via-transparent to-[#071226]/60" />
-  </div>
-
-  <div className="relative max-w-6xl mx-auto px-6 flex items-center h-full">
-    {/* Hero Text */}
-    <div className="max-w-2xl text-white">
-      <h1 className="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow">
-        Premier Academic University
-      </h1>
-      <p className="mt-4 text-lg text-gray-200/90 max-w-xl">
-        Excellence in education, research, and leadership — join a community that shapes
-        the future.
-      </p>
-
-      <div className="mt-8 flex gap-4">
-        <button
-          onClick={() => scrollToSection("admissions")}
-          className="bg-yellow-400 hover:bg-yellow-500 text-[#071226] font-semibold px-6 py-3 rounded-lg shadow-lg transition transform hover:-translate-y-0.5"
-        >
-          Apply Now
-        </button>
-
-        <button
-          onClick={() => scrollToSection("about")}
-          className="border border-gray-400 text-white px-6 py-3 rounded-lg hover:bg-white/5 transition"
-        >
-          Learn About Us
-        </button>
-      </div>
-    </div>
-
-    {/* Notice Board on large screens */}
-    <div className="hidden lg:block ml-auto">
-      <NoticeBoard />
-    </div>
-  </div>
-</header>
+      {/* HERO SECTION WITH SLIDER */}
+      <header id="home" className="relative w-full h-[84vh] pt-20 overflow-hidden">
+        <div className="absolute inset-0">
+          {/* 🔥 Animated Background Slider */}
+{images.map((img, index) => (
+    <Image
+      key={index}
+      src={img}
+      alt="Hero"
+      fill
+      className={`
+        object-cover absolute inset-0
+        transition-transform duration-[1200ms] ease-in-out
+        ${current === index ? "translate-x-0" : "translate-x-full"}
+      `}
+    />
+  ))}
 
 
-      {/* ADMISSIONS WITH IMAGES */}
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#071226]/80 via-transparent to-[#071226]/60" />
+        </div>
+
+        <div className="relative max-w-6xl mx-auto px-6 flex items-center h-full">
+          {/* TEXT */}
+          <div className="max-w-2xl text-white">
+            <h1 className="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow">
+              Premier Academic University
+            </h1>
+
+            <p className="mt-4 text-lg text-gray-200/90 max-w-xl">
+              Excellence in education, research, and leadership — join a community that shapes the future.
+            </p>
+
+            <div className="mt-8 flex gap-4">
+              <button
+                className="bg-yellow-400 text-[#071226] px-4 py-2 rounded-lg font-medium hover:bg-yellow-500 transition"
+                onClick={() => (window.location.href = "/admission")}
+              >
+                Apply Now
+              </button>
+
+              <button
+                onClick={() => scrollToSection("about")}
+                className="border border-gray-400 text-white px-6 py-3 rounded-lg hover:bg-white/5 transition"
+              >
+                Learn About Us
+              </button>
+            </div>
+          </div>
+
+          {/* Notice Board */}
+          <div className="hidden lg:block ml-auto">
+            <NoticeBoard />
+          </div>
+        </div>
+      </header>
+
+
+     {/* ADMISSIONS WITH IMAGES */}
 <section id="admissions" className="py-16 px-6 bg-[#071a2c]">
   <div className="max-w-6xl mx-auto">
     <div className="flex items-center justify-between mb-8">
@@ -170,7 +217,7 @@ export default function Home() {
       <div>
         <button
           className="bg-yellow-400 text-[#071226] px-4 py-2 rounded-lg font-medium hover:bg-yellow-500 transition"
-          onClick={() => scrollToSection("admissions")}
+          onClick={() => (window.location.href = "/admission")}
         >
           Apply Now
         </button>
@@ -193,7 +240,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
             <div>
               <h4 className="text-white font-semibold">Open Day {idx + 1}</h4>
-              <p className="text-gray-300 text-sm">Campus tour • Scholarship info • Meet faculty</p>
+              <p className="text-gray-300 text-sm">
+                Campus tour • Scholarship info • Meet faculty
+              </p>
             </div>
           </div>
         </div>
@@ -202,13 +251,15 @@ export default function Home() {
   </div>
 </section>
 
+
+
 {/* ACADEMICS WITH ICONS */}
 <section id="academics" className="py-16 px-6 bg-[#071226]">
   <div className="max-w-6xl mx-auto">
     <div className="flex items-center justify-between mb-6">
       <h2 className="text-3xl font-bold text-white">Academics</h2>
 
-      {/* SEE MORE BUTTON — Added Here */}
+      {/* SEE MORE BUTTON */}
       <Link
         href="/academics"
         className="bg-yellow-400 text-[#071226] px-5 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition shadow-lg"
@@ -218,50 +269,68 @@ export default function Home() {
     </div>
 
     <div className="grid md:grid-cols-3 gap-6">
-      <article className="bg-[#081c32] p-6 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-[1.02]">
+
+      {/* Undergraduate */}
+      <article className="bg-[#081c32] p-6 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105 hover:ring-2 hover:ring-yellow-400">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-yellow-600 flex items-center justify-center">
-            <Image src="/icons/grad.png" alt="UG" width={36} height={36} />
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-yellow-600 flex items-center justify-center text-white">
+            {/* Graduation cap icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m0-7L3 9m9 5l9-5" />
+            </svg>
           </div>
           <div>
             <h3 className="text-lg font-semibold text-white">Undergraduate</h3>
             <p className="text-gray-300 text-sm mt-1">
-              Bachelors with modern syllabus, industry projects and internships.
+              Comprehensive Bachelors programs with modern syllabus, industry-linked projects, 
+              and internship opportunities to kickstart your career.
             </p>
           </div>
         </div>
       </article>
 
-      <article className="bg-[#081c32] p-6 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-[1.02]">
+      {/* Postgraduate */}
+      <article className="bg-[#081c32] p-6 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105 hover:ring-2 hover:ring-yellow-400">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-yellow-600 flex items-center justify-center">
-            <Image src="/icons/master.png" alt="PG" width={36} height={36} />
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-yellow-600 flex items-center justify-center text-white">
+            {/* Academic cap + book icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m0-7L3 9m9 5l9-5" />
+            </svg>
           </div>
           <div>
             <h3 className="text-lg font-semibold text-white">Postgraduate</h3>
             <p className="text-gray-300 text-sm mt-1">
-              Specialized masters with research & industry tie-ups.
+              Specialized Masters programs with research opportunities, international collaborations, 
+              and industry exposure to enhance expertise and employability.
             </p>
           </div>
         </div>
       </article>
 
-      <article className="bg-[#081c32] p-6 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-[1.02]">
+      {/* Research */}
+      <article className="bg-[#081c32] p-6 rounded-lg shadow hover:shadow-2xl transition transform hover:scale-105 hover:ring-2 hover:ring-yellow-400">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-yellow-600 flex items-center justify-center">
-            <Image src="/icons/research.png" alt="Research" width={36} height={36} />
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-yellow-600 flex items-center justify-center text-white">
+            {/* Microscope icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 20h12M9 20v-6m6 6v-6m-6 0h6M9 4h6l2 6H7l2-6z" />
+            </svg>
           </div>
           <div>
             <h3 className="text-lg font-semibold text-white">Research</h3>
             <p className="text-gray-300 text-sm mt-1">
-              PhD programs, funded projects and labs.
+              Cutting-edge research programs, PhD opportunities, and access to state-of-the-art labs 
+              and funding for innovative projects.
             </p>
           </div>
         </div>
       </article>
+
     </div>
   </div>
 </section>
+
 
 
      {/* FACULTY WITH SEE MORE BUTTON + IMAGES */}
@@ -303,25 +372,45 @@ export default function Home() {
 
 
       {/* CAMPUS LIFE (gallery) */}
-      <section id="campus" className="py-16 px-6 bg-[#071226]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-6">Campus Life</h2>
-          <p className="text-gray-300 max-w-2xl mb-8">
-            Student clubs, festivals, sports and everyday moments — explore campus life at Premier Academic.
-          </p>
+<section id="campus" className="py-16 px-6 bg-[#071226]">
+  <div className="max-w-6xl mx-auto">
+    <h2 className="text-3xl font-bold text-white mb-6">Campus Life</h2>
+    <p className="text-gray-300 max-w-2xl mb-8">
+      Student clubs, festivals, sports and everyday moments — explore campus life at Premier Academic.
+    </p>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {["/c1.jpg", "/c2.jpg", "/c3.jpg", "/c4.jpg"].map((src) => (
-              <div
-                key={src}
-                className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:scale-[1.02]"
-              >
-                <Image src={src} width={400} height={280} alt="Campus" className="object-cover w-full h-48" />
-              </div>
-            ))}
+    <div className="grid md:grid-cols-4 gap-6">
+      {[
+        { src: "/c3.jpg", title: "Library", slug: "library" },
+        { src: "/sport.jpg", title: "Sports Ground", slug: "sports" },
+        { src: "/hostel.jpg", title: "Hostel Life", slug: "hostel" },
+        { src: "/lab.jpg", title: "Labs & Research", slug: "labs" },
+      ].map(({ src, title, slug }) => (
+        <Link href={`/campus/${slug}`} key={slug}>
+          <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:scale-[1.02] cursor-pointer group">
+            
+            {/* Image */}
+            <Image
+              src={src}
+              width={400}
+              height={280}
+              alt={title}
+              className="object-cover w-full h-48"
+            />
+
+            {/* Hover Title Overlay */}
+            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 
+                            transition flex items-center justify-center">
+              <p className="text-white text-lg font-semibold">{title}</p>
+            </div>
+
           </div>
-        </div>
-      </section>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* TESTIMONIALS SECTION */}
 <section id="testimonials" className="py-16 px-6 bg-[#071226]">
@@ -332,32 +421,70 @@ export default function Home() {
       Hear real experiences from students who are part of our academic community.
     </p>
 
+    {/* State for show more */}
     <div className="grid md:grid-cols-3 gap-8">
-      
+      {/* Default 3 testimonials */}
       <TestimonialCard
-        img="/user1.jpg"
+        img="/student1.jpg"
         name="Aarav Sharma"
         role="B.Tech Student"
         message="The faculty and environment helped me grow both academically and personally. Truly a great learning space."
       />
 
       <TestimonialCard
-        img="/user2.jpg"
+        img="/student3.jpg"
         name="Fatima Noor"
         role="MBA Student"
         message="The business school provides excellent industry exposure and placements. Amazing experience!"
       />
 
       <TestimonialCard
-        img="/user3.jpg"
+        img="/student2.jpg"
         name="Rohan Das"
         role="B.Sc Student"
         message="Labs, curriculum, clubs — everything is built to help students succeed. Highly recommended!"
       />
+
+      {/* More Testimonials (Hidden by default) */}
+      {showMore && (
+        <>
+          <TestimonialCard
+            img="/student6.png"
+            name="Neha Verma"
+            role="BCA Student"
+            message="Great campus life and supportive teachers. I learned so much here."
+          />
+
+          <TestimonialCard
+            img="/student7.jpg"
+            name="Sahil Khan"
+            role="M.Tech Student"
+            message="Research opportunities and mentorship are amazing. Best environment for technical growth."
+          />
+
+          <TestimonialCard
+            img="/student5.jpg"
+            name="Aisha Siddiqui"
+            role="BA Student"
+            message="A wonderful place with great values and learning. I truly enjoyed my journey!"
+          />
+        </>
+      )}
     </div>
-    
+
+    {/* View More / View Less Button */}
+    <div className="text-center mt-10">
+      <button
+        onClick={() => setShowMore(!showMore)}
+        className="px-6 py-2 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition"
+      >
+        {showMore ? "View Less" : "View More"}
+      </button>
+    </div>
+
   </div>
 </section>
+
 
 
        
@@ -397,39 +524,14 @@ export default function Home() {
       </div>
 
       {/* CONTACT FORM */}
-      <form className="bg-[#081428] p-4 rounded-lg shadow-inner space-y-3">
-        <div className="grid md:grid-cols-2 gap-3">
-          <input
-            className="bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338] focus:outline-none focus:ring-1 focus:ring-yellow-400"
-            placeholder="Your Name"
-            required
-          />
-          <input
-            type="email"
-            className="bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338] focus:outline-none focus:ring-1 focus:ring-yellow-400"
-            placeholder="Email"
-            required
-          />
-        </div>
+       
 
-        <textarea
-          className="w-full bg-[#071226] text-gray-200 px-3 py-2 rounded border border-[#0f2338] focus:outline-none focus:ring-1 focus:ring-yellow-400"
-          placeholder="Message"
-          rows={4}
-          required
-        />
-
-        <button
-          type="submit"
-          className="bg-yellow-400 text-[#071226] px-4 py-2 rounded font-semibold hover:bg-yellow-500 transition w-full md:w-auto"
-        >
-          Send Message
-        </button>
-      </form>
+  <ContactForm />
+ 
     </div>
 
     {/* RIGHT SIDE - GOOGLE MAP EMBED */}
-    {/* <div className="rounded-xl overflow-hidden shadow-lg">
+    <div className="rounded-xl overflow-hidden shadow-lg">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.413003353889!2d78.37346277507574!3d17.44974170137227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93e5e36c48fb%3A0x58a3bfa2a5756fa0!2sHitech%20City%2C%20Hyderabad%2C%20Telangana%20500081!5e0!3m2!1sen!2sin!4v1706200112345"
         width="100%"
@@ -438,7 +540,7 @@ export default function Home() {
         loading="lazy"
         className="w-full h-full border-0"
       ></iframe>
-    </div> */}
+    </div>
 
   </div>
 </section>
